@@ -112,14 +112,6 @@ final class StatusBarController: NSObject, GestureProcessorDelegate, NSMenuDeleg
         cameraItem.submenu = cameraSub
         menu.addItem(cameraItem)
 
-        let onboardingItem = NSMenuItem(
-            title: "Show Welcome",
-            action: #selector(showOnboarding),
-            keyEquivalent: ""
-        )
-        onboardingItem.target = self
-        menu.addItem(onboardingItem)
-
         menu.addItem(.separator())
 
         let quitItem = NSMenuItem(
@@ -221,7 +213,7 @@ final class StatusBarController: NSObject, GestureProcessorDelegate, NSMenuDeleg
     }
 
     private func startTracking() {
-        guard PermissionsManager.shared.cameraStatus == .granted else {
+        guard PermissionsManager.shared.allGranted else {
             NotificationCenter.default.post(name: .pointlessRequestShowOnboarding, object: nil)
             return
         }

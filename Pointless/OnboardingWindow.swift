@@ -183,7 +183,7 @@ private struct OnboardingRootView: View {
                 PermissionCard(
                     symbol: "hand.point.up.left.fill",
                     title: "Grant accessibility access",
-                    description: "This lets Pointless move the cursor and send clicks when you pinch. You can revoke it any time in System Settings.",
+                    description: "This lets Pointless move the cursor and send clicks when you pinch.\n\n(If you enabled it but it's stuck, remove Pointless with the '-' button and add it back.)",
                     status: permissions.accessibilityStatus,
                     actionLabel: permissions.accessibilityStatus == .granted ? "Granted" : "Open System Settings",
                     action: {

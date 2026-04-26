@@ -32,9 +32,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusBarController = StatusBarController()
 
-        if !SettingsStore.shared.didCompleteOnboarding {
+        if !SettingsStore.shared.didCompleteOnboarding || !PermissionsManager.shared.allGranted {
             showOnboarding()
-        } else if SettingsStore.shared.autoStartTracking, PermissionsManager.shared.allGranted {
+        } else if SettingsStore.shared.autoStartTracking {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 self?.statusBarController?.toggleTracking()
             }

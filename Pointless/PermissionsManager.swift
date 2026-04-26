@@ -43,7 +43,8 @@ final class PermissionsManager: ObservableObject {
     }
 
     private func currentAccessibilityStatus() -> PermissionStatus {
-        AXIsProcessTrusted() ? .granted : .notDetermined
+        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: false] as CFDictionary
+        return AXIsProcessTrustedWithOptions(options) ? .granted : .notDetermined
     }
 
     var allGranted: Bool {

@@ -1,0 +1,72 @@
+# ============================================================
+# Xcode
+# ============================================================
+build/
+*.xcarchive
+*.xcresult
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+
+# ============================================================
+# Swift Package Manager
+# ============================================================
+.build/
+.swiftpm/
+*.resolved
+
+# ============================================================
+# Release / Distribution outputs
+# ============================================================
+dist/
+build/
+*.dmg
+*.zip
+
+# ============================================================
+# macOS
+# ============================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# ============================================================
+# Editor / IDE
+# ============================================================
+.claude/
+.cursor/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ============================================================
+# Secrets / credentials
+# ============================================================
+*.p8
+*.p12
+*.pem
+*.mobileprovision

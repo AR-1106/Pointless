@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>LSUIElement</key>
+    <true/>
+    <key>LSMinimumSystemVersion</key>
+    <string>26.0</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Pointless uses your camera to track hand gestures. Frames are analyzed on-device with Apple's Vision framework and never uploaded.</string>
+    <key>NSAccessibilityUsageDescription</key>
+    <string>Pointless moves your cursor and sends clicks based on your hand gestures.</string>
+    <key>NSSupportsAutomaticTermination</key>
+    <true/>
+    <key>NSSupportsSuddenTermination</key>
+    <true/>
+    <key>SUFeedURL</key>
+    <string>https://pointless.app/appcast.xml</string>
+    <key>SUEnableAutomaticChecks</key>
+    <true/>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.pointless.url</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>pointless</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>

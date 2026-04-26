@@ -4,6 +4,17 @@
 
 Pointless is a macOS 26 Tahoe menu-bar app that turns your webcam into a touchless trackpad. Pinch and release to tap; stay pinched and move your middle finger to scroll. Every frame is analyzed on-device with Apple's Vision framework — nothing leaves your Mac.
 
+## Installation
+
+1. Download the latest `Pointless-x.y.z.dmg` from the [Releases](https://github.com/AR-1106/Pointless/releases) page.
+2. Open the DMG and drag `Pointless.app` to your Applications folder.
+3. Since the app is not currently notarized with an Apple Developer account, you must bypass Gatekeeper on the first launch:
+   - Open your Applications folder in Finder.
+   - **Right-click (or Control-click)** on `Pointless.app` and select **Open**.
+   - Click **Open** in the security dialog that appears.
+
+> Note: If you simply double-click the app on the first launch, macOS will block it from opening. You only need to perform the right-click bypass once.
+
 ## Requirements
 
 - macOS 26 Tahoe or newer

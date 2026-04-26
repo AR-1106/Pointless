@@ -16,7 +16,6 @@ A compressed, chronological checklist for shipping Pointless 1.0.
 - [ ] Finalize copy on `website/index.html` (run through Grammarly + a friend).
 - [ ] Make sure `SUFeedURL` in `Info.plist` and `appcast.xml` point at the production URL.
 - [ ] `./scripts/release.sh 1.0.0 1` produces a DMG. Smoke test: download, open, drag to Applications, launch, onboard, tap, scroll, quit, reopen.
-- [ ] Test local Homebrew cask: `brew install --cask scripts/homebrew/pointless.rb`.
 
 ## T-1 day · Pre-announce
 
@@ -34,7 +33,6 @@ A compressed, chronological checklist for shipping Pointless 1.0.
 - [ ] Post Show HN with the demo video link.
 - [ ] Post to r/macapps.
 - [ ] Pin a thread on X/Bluesky.
-- [ ] Push `pointless.rb` to the `AR-1106/homebrew-pointless` tap repository.
 
 ### First 4 hours
 

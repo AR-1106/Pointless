@@ -132,21 +132,6 @@ else
 fi
 
 echo ""
-echo "=== 7. Update Homebrew Cask ==="
-CASK_PATH="scripts/homebrew/pointless.rb"
-if [[ -f "$CASK_PATH" ]]; then
-  DMG_SHA256=$(shasum -a 256 "$DMG_DIR/$DMG_NAME" | awk '{ print $1 }')
-  # Use sed to replace version and sha256 in the cask file
-  sed -i '' "s/version \".*\"/version \"$VERSION\"/g" "$CASK_PATH"
-  sed -i '' "s/sha256 \".*\"/sha256 \"$DMG_SHA256\"/g" "$CASK_PATH"
-  echo "Updated $CASK_PATH with version $VERSION and sha256 $DMG_SHA256"
-  echo ""
-  echo "Don't forget to commit $CASK_PATH to your tap repository!"
-else
-  echo "Cask file not found at $CASK_PATH, skipping Homebrew update."
-fi
-
-echo ""
 echo "=== Done ==="
 echo "DMG: $DMG_DIR/$DMG_NAME"
 echo "Published to: $RELEASES_DIR/"

@@ -7,13 +7,12 @@ A compressed, chronological checklist for shipping Pointless 1.0.
 - [ ] Send the build to 10-20 people (friends, TestFlight-equivalent Sparkle pre-release channel).
 - [ ] Run through onboarding on 3 different Macs (Apple silicon only, different macOS 26 point releases).
 - [ ] Verify `Settings → Updates → Check for Updates` works with a bumped pre-release build.
-- [ ] Record the 30-second demo video at `website/demo.mp4` (native capture in QuickTime, trimmed to 30 s).
-- [ ] Export `website/demo-poster.jpg` as the paused frame.
+- [ ] Record the 30-second demo video (native capture in QuickTime, trimmed to 30 s).
+- [ ] Export demo-poster.jpg as the paused frame.
 
 ## T-2 days · Freeze + copy
 
 - [ ] Feature freeze. Only bug fixes.
-- [ ] Finalize copy on `website/index.html` (run through Grammarly + a friend).
 - [ ] Make sure `SUFeedURL` in `Info.plist` and `appcast.xml` point at the production URL.
 - [ ] `./scripts/release.sh 1.0.0 1` produces a DMG. Smoke test: download, open, drag to Applications, launch, onboard, tap, scroll, quit, reopen.
 

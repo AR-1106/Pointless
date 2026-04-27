@@ -59,13 +59,6 @@ scripts/
   ExportOptions.plist       Developer ID export options
   README.md                 Release prerequisites + usage
 
-website/
-  index.html                Landing page
-  style.css
-  privacy.html
-  favicon.svg
-  press-kit/README.md       Press kit and marketing copy
-
 LAUNCH.md                   Launch-day runbook
 ```
 

@@ -36,10 +36,10 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         w.delegate = self
 
         let host = NSHostingView(
-            rootView: OnboardingRootView { [weak self] in
+            rootView: AnyView(OnboardingRootView { [weak self] in
                 self?.finish()
                 completion?()
-            }
+            })
         )
         host.translatesAutoresizingMaskIntoConstraints = false
         w.contentView = host
@@ -52,18 +52,19 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
 
     func finish() {
         SettingsStore.shared.didCompleteOnboarding = true
-        // Closing the hosting window synchronously from the primary button action can
-        // tear down SwiftUI mid-transaction (objc_release / “entangling fence” issues)
-        // and leave AppKit in a bad state for the status item menu. Finish on the next turn.
-        // Disable the close animation before closing: the default titled-window close
-        // animation creates an NSWindowTransformAnimation whose block-captures can race
-        // with the activation-policy change queued below, causing EXC_BAD_ACCESS in
-        // _NSWindowTransformAnimation dealloc.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
-            guard let self else { return }
-            self.window?.animationBehavior = .none
-            self.window?.close()
+        
+        // Hide the window immediately. 
+        // We INTENTIONALLY do not call `window?.close()` here. SwiftUI on macOS
+        // has a persistent bug where a Button action destroying its own NSHostingView
+        // causes EXC_BAD_ACCESS in objc_release during layout teardown.
+        // Hiding the window with orderOut(nil) completely avoids the crash.
+        window?.orderOut(nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             NotificationCenter.default.post(name: .pointlessOnboardingFinished, object: nil)
+            
+            // Switch back to accessory mode so the app doesn't show in the Dock
+            NSApp.setActivationPolicy(.accessory)
         }
     }
 
@@ -215,7 +216,11 @@ private struct OnboardingRootView: View {
                 // Don't wrap in withAnimation on the last step — closing the hosting
                 // window inside a live SwiftUI transaction causes EXC_BAD_ACCESS.
                 if let last = OnboardingStep.allCases.last, step == last {
-                    next()
+                    // Break completely out of SwiftUI's event loop to prevent
+                    // the button from destroying its own view hierarchy mid-action.
+                    DispatchQueue.main.async {
+                        next()
+                    }
                 } else {
                     withAnimation(Motion.smooth) { next() }
                 }
@@ -238,17 +243,33 @@ private struct OnboardingRootView: View {
     private var primaryButtonTitle: String {
         switch step {
         case .welcome: return "Get started"
-        case .camera, .accessibility, .tutorial: return "Continue"
+        case .camera: 
+            #if DEBUG
+            return permissions.cameraStatus == .granted ? "Continue" : "Skip (Dev)"
+            #else
+            return "Continue"
+            #endif
+        case .accessibility: 
+            #if DEBUG
+            return permissions.accessibilityStatus == .granted ? "Continue" : "Skip (Dev)"
+            #else
+            return "Continue"
+            #endif
+        case .tutorial: return "Continue"
         case .ready: return "Open Pointless"
         }
     }
 
     private var canAdvance: Bool {
+        #if DEBUG
+        return true
+        #else
         switch step {
         case .camera: return permissions.cameraStatus == .granted
         case .accessibility: return permissions.accessibilityStatus == .granted
         default: return true
         }
+        #endif
     }
 
     private func next() {
